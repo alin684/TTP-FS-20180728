@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_191005) do
     t.string "name"
     t.string "password_digest"
     t.string "auth_token"
-    t.decimal "balance", precision: 10, scale: 2, default: "5000.0"
+    t.decimal "money", precision: 10, scale: 2, default: "5000.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
