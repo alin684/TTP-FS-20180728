@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :password_digest
       t.string :auth_token
+      t.decimal :balance, precision: 10, scale: 2, default: 5000
 
       t.timestamps
     end
