@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
   get "/profile" => "users#profile"
   resources :users
+
+  get "/stockquote/:id" => "stocks#getStockInfo"
+  get "/batchquote/:id" => "stocks#getBatchInfo"
+  get "/batchprice/:id" => "stocks#getBatchPricesOnly"
 end
