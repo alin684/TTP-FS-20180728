@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Auth from '../modules/Auth';
+import MakeTransactionForm from './MakeTransactionForm';
+
 class Home extends Component {
   constructor() {
     super()

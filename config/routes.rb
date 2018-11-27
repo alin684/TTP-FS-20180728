@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get "/stockquote/:id" => "stocks#getStockInfo"
   get "/batchquote/:id" => "stocks#getBatchInfo"
   get "/batchprice/:id" => "stocks#getBatchPricesOnly"
+
+  post "/makeTransaction" => "users#doTransaction"
 end

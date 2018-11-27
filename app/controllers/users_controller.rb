@@ -18,6 +18,19 @@ class UsersController < ApiController
     }
   end
 
+  def doTransaction
+    user = User.find_by_auth_token!(request.headers[:token])
+    if user.makeTransaction(params[:transaction])
+      user.reload
+      render json: {
+        email: user.email,
+        name: user.name,
+        money: user.money,
+        stocks: user.stocks
+      }
+    end
+  end
+  
   private
 
   def user_params
