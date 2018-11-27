@@ -30,7 +30,12 @@ class UsersController < ApiController
       }
     end
   end
-  
+
+  def transactionHistory
+    user = User.find_by_auth_token!(request.headers[:token])
+    transactions = user.transactions.order('transactions.created_at DESC')
+  end
+
   private
 
   def user_params

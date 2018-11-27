@@ -9,7 +9,7 @@ import {BrowserRouter as Router, Link, Redirect, Route}
 import Auth from './modules/Auth';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
-import Home from './components/Home';
+import Portfolio from './components/Portfolio';
 
 class App extends Component {
   constructor() {
@@ -41,6 +41,7 @@ class App extends Component {
       Auth.authenticateToken(res.token);
       this.setState({
         auth: Auth.isUserAuthenticated(),
+        error: false,
       });
     }})
   }
@@ -61,6 +62,7 @@ class App extends Component {
       Auth.authenticateToken(res.token);
       this.setState({
         auth: Auth.isUserAuthenticated(),
+        error: false,
       });
     }})
   }
@@ -97,7 +99,7 @@ class App extends Component {
             <Menu.Menu position='right'>
             <Menu.Item name='login' as={Link} to='/login' />
             <Menu.Item name='register' as={Link} to='/register' />
-            <Menu.Item name='home' as={Link} to='/home' />
+            <Menu.Item name='portfolio' as={Link} to='/portfolio' />
             <Menu.Item name='logout' onClick={this.handleLogout} />
             </Menu.Menu>
           </Menu>
@@ -105,17 +107,17 @@ class App extends Component {
           <Route
             exact path="/register"
             render={() => (this.state.auth)
-              ? <Redirect to="/home" />
+              ? <Redirect to="/portfolio" />
               : <RegisterForm handleRegister={this.handleRegister} /> } />
           <Route
             exact path="/login"
             render={() => (this.state.auth)
-              ? <Redirect to="/home" />
+              ? <Redirect to="/portfolio" />
               : <LoginForm handleLogin={this.handleLogin} />} />
           <Route
-            exact path="/home"
+            exact path="/portfolio"
             render={() => (this.state.auth)
-              ? <Home />
+              ? <Portfolio />
               : <Redirect to="/login" />} />
         </div>
       </Router>

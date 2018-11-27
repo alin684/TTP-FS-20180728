@@ -32,7 +32,7 @@ class User < ApplicationRecord
       newTransaction.save;
       self.update_attribute(:money, newMoney);
 
-      existingStock = self.stocks.find(|stock| stock.ticker == newTransaction[:ticker]);
+      existingStock = self.stocks.find{|stock| stock.ticker == newTransaction[:ticker]};
       if existingStock
         existingStock.shares += newTransaction[:shares]
         existingStock.save;

@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   get "/profile" => "users#profile"
   resources :users
 
-  get "/stockquote/:id" => "stocks#getStockInfo"
-  get "/batchquote/:id" => "stocks#getBatchInfo"
-  get "/batchprice/:id" => "stocks#getBatchPricesOnly"
-
   post "/makeTransaction" => "users#doTransaction"
+  get "/getTransactions" => "user#transactionHistory"
 end

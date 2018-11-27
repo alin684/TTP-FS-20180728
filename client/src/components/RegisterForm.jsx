@@ -24,8 +24,11 @@ class RegisterForm extends Component {
       <div className="form">
         <form onSubmit={(e) => this.props.handleRegister(e, this.state)}>
           <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleChange} />
+          <br />
           <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange} />
+          <br />
           <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleChange} />
+          <br />
           <input type="submit" value="Register" />
         </form>
       </div>
