@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Message, Icon, Menu } from 'semantic-ui-react'
+
 import './App.css';
 
 import {BrowserRouter as Router, Link, Redirect, Route}
@@ -14,7 +16,7 @@ class App extends Component {
     super();
     this.state = {
       auth: Auth.isUserAuthenticated(),
-      shouldGoHome: false,
+      error: false,
     };
     this.handleRegister = this.handleRegister.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -32,15 +34,15 @@ class App extends Component {
         'Content-Type': 'application/json',
       }
     }).then(res => res.json())
-      .then(res => {
-        Auth.authenticateToken(res.token);
-        this.setState({
-          auth: Auth.isUserAuthenticated(),
-          shouldGoHome: true,
-        });
-      }).catch(err => {
-        console.log(err);
+    .then(res => {
+      if (res.errors) {
+        this.setState({ error: true })
+      } else {
+      Auth.authenticateToken(res.token);
+      this.setState({
+        auth: Auth.isUserAuthenticated(),
       });
+    }})
   }
 
   handleLogin(e, data) {
@@ -53,12 +55,14 @@ class App extends Component {
       }
     }).then(res => res.json())
     .then(res => {
+      if (res.errors){
+        this.setState({ error: true})
+      } else {
       Auth.authenticateToken(res.token);
       this.setState({
         auth: Auth.isUserAuthenticated(),
-        shouldGoHome: true,
       });
-    }).catch(err => console.log(err));
+    }})
   }
 
   handleLogout() {
@@ -73,19 +77,31 @@ class App extends Component {
       this.setState({
         auth: Auth.isUserAuthenticated(),
       })
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
+    let message = <Message attached='bottom' warning>
+      <Icon name='warning circle' />
+      Something went wrong! Please try again.
+    </Message>
+
     return (
       <Router>
         <div className="App">
-          <div className="navBar">
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-            <Link to="/home">Home</Link>
-            <span onClick={this.handleLogout}>Logout</span>
-          </div>
+          {this.state.error ? message : null}
+
+          <Menu className="navBar" inverted fixed="bottom">
+            <Menu.Menu position='right'>
+            <Menu.Item name='login' as={Link} to='/login' />
+            <Menu.Item name='register' as={Link} to='/register' />
+            <Menu.Item name='home' as={Link} to='/home' />
+            <Menu.Item name='logout' onClick={this.handleLogout} />
+            </Menu.Menu>
+          </Menu>
+
           <Route
             exact path="/register"
             render={() => (this.state.auth)
@@ -98,7 +114,9 @@ class App extends Component {
               : <LoginForm handleLogin={this.handleLogin} />} />
           <Route
             exact path="/home"
-            render={() => <Home />} />
+            render={() => (this.state.auth)
+              ? <Home />
+              : <Redirect to="/login" />} />
         </div>
       </Router>
     );
