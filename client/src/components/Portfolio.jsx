@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Message, Icon } from 'semantic-ui-react'
+
 import Auth from '../modules/Auth';
 
 class Portfolio extends Component {
@@ -10,6 +12,7 @@ class Portfolio extends Component {
       ticker: '',
       shares: '',
       transactions: '',
+      error: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.makeTransaction = this.makeTransaction.bind(this);
@@ -40,39 +43,26 @@ class Portfolio extends Component {
     });
   }
 
-  makeTransaction() {
+  makeTransaction(e) {
+    e.preventDefault();
+
     let money = this.state.money;
     let ticker = this.state.ticker;
     let shares = this.state.shares;
 
-    console.log('what')
-
     fetch(`https://api.iextrading.com/1.0/stock/${ticker}/price`)
       .then(res => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           return res.json();
         } else {
-          throw new Error("Something went wrong")
+          this.setState({ error: true});
         }
       })
       .then(price => {
         if ((price * shares) < money) {
-          fetch('/makeTransaction', {
-            method: 'POST',
-            body: JSON.stringify({ ticker, price, shares }),
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          }).then(res => res.json())
-          .then(res => {
-            if (res) {
-              this.getTransactions();
-            } else {
-              throw new Error("Not enough money");
-            }
-          })
+          console.log(money - (price*shares))
         } else {
-          throw new Error("Not enough money");
+          this.setState({ error: true})
         }
       })
   }
@@ -104,6 +94,11 @@ class Portfolio extends Component {
   }
 
   render() {
+    let message = <Message attached='bottom' warning>
+      <Icon name='warning circle' />
+      Something went wrong. Please try again!
+    </Message>
+
     return (
       <div>
         <div> ACCOUNT BALANCE: $ {this.state.money} </div>
