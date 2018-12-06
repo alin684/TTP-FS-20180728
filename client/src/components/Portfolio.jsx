@@ -12,11 +12,13 @@ class Portfolio extends Component {
       ticker: '',
       shares: '',
       transactions: '',
+      stocks: '',
       error: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.buyStock = this.buyStock.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
+    this.stockShower = this.stockShower.bind(this);
   }
 
   componentDidMount(){
@@ -93,11 +95,25 @@ class Portfolio extends Component {
       let money = res.money;
       console.log(res)
       this.setState({
-        money: money,
+        money: res.money,
+        transactions: res.transactions,
+        stocks: res.stocks,
         error: false,
       })
     });
 
+  }
+
+  stockShower() {
+    if (this.state.stocks) {
+      this.state.stocks.map(stock => {
+        return (
+          <div>
+            {`You have ${stock.shares} shares of ${stock.ticker} stock.`}
+          </div>
+        )
+      })
+    }
   }
 
   render() {
@@ -122,6 +138,11 @@ class Portfolio extends Component {
             <input type="submit" value="Buy Stock" />
           </form>
         </div>
+        <br />
+        <br />
+        STOCKS:
+        <br />
+        {this.stockShower()}
       </div>
 
 
