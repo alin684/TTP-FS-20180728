@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get "/profile" => "users#profile"
   resources :users
 
-  post "/makeTransaction" => "users#doTransaction"
+  post "/buyStock" => "users#buy"
   get "/getTransactions" => "user#transactionHistory"
 end

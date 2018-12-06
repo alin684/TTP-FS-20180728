@@ -20,14 +20,13 @@ class User < ApplicationRecord
     end
   end
 
-  def makeTransaction(transaction)
-    valid = false;
+  def buyStock(transaction)
     newMoney = self.money - (transaction[:shares].to_i * transaction[:price].to_f);
+    valid = false;
     if newMoney > 0
       valid = true;
     end
-    newTransaction = Transaction.new(user:self, ticker:transaction[:ticker], shares:transaction[:shares])
-
+    newTransaction = Transaction.new(user:self, ticker:transaction[:ticker], price:transaction[:price], shares:transaction[:shares]);
     if(valid && newTransaction)
       newTransaction.save;
       self.update_attribute(:money, newMoney);
@@ -48,6 +47,7 @@ class User < ApplicationRecord
     else
       return false;
     end
+    return true
   end
 
 end

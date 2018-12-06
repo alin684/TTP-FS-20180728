@@ -12,10 +12,10 @@ class Portfolio extends Component {
       ticker: '',
       shares: '',
       transactions: '',
-      error: '',
+      error: false,
     }
     this.handleChange = this.handleChange.bind(this);
-    this.makeTransaction = this.makeTransaction.bind(this);
+    this.buyStock = this.buyStock.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
   }
 
@@ -43,7 +43,7 @@ class Portfolio extends Component {
     });
   }
 
-  makeTransaction(e) {
+  buyStock(e) {
     e.preventDefault();
 
     let money = this.state.money;
@@ -53,6 +53,7 @@ class Portfolio extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/${ticker}/price`)
       .then(res => {
         if (res.status === 200) {
+          this.setState({ error: false})
           return res.json();
         } else {
           this.setState({ error: true});
@@ -60,7 +61,17 @@ class Portfolio extends Component {
       })
       .then(price => {
         if ((price * shares) < money) {
-          console.log(money - (price*shares))
+          fetch('/buyStock', {
+            method: 'POST',
+            body: JSON.stringify({ ticker: ticker, price: price, shares:shares }),
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res)
+          })
         } else {
           this.setState({ error: true})
         }
@@ -87,7 +98,8 @@ class Portfolio extends Component {
       })
       this.setState({
         transactions: transactions,
-        money: money
+        money: money,
+        error: false,
       })
     });
 
@@ -101,15 +113,18 @@ class Portfolio extends Component {
 
     return (
       <div>
+
+        {this.state.error ? message : null}
+
         <div> ACCOUNT BALANCE: $ {this.state.money} </div>
         <br />
         <div className="form">
-          <form onSubmit={this.makeTransaction} >
+          <form onSubmit={this.buyStock} >
             <input type="ticker" name="ticker" placeholder="ticker symbol" value={this.state.ticker} onChange={this.handleChange} />
             <br />
             <input type="shares" name="shares" placeholder="shares" value={this.state.shares} onChange={this.handleChange} />
             <br />
-            <input type="submit" value="Buy" />
+            <input type="submit" value="Buy Stock" />
           </form>
         </div>
       </div>

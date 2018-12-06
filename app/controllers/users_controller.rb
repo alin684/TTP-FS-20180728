@@ -1,5 +1,5 @@
 class UsersController < ApiController
-  before_action :require_login, except: [:create]
+  before_action :require_login, except: [:create, :buy]
 
   # wrap_parameters :user, include: [:name, :email, :password]
 
@@ -18,9 +18,9 @@ class UsersController < ApiController
     }
   end
 
-  def doTransaction
+  def buy
     user = User.find_by_auth_token!(request.headers[:token])
-    if user.makeTransaction(params[:transaction])
+    if user.buyStock(params)
       user.reload
       render json: {
         email: user.email,
@@ -33,7 +33,7 @@ class UsersController < ApiController
 
   def transactionHistory
     user = User.find_by_auth_token!(request.headers[:token])
-    transactions = user.transactions.order('transactions.created_at DESC')
+    render json: { user.transactions }
   end
 
   private
