@@ -14,7 +14,8 @@ class UsersController < ApiController
       email: user.email,
       name: user.name,
       money: user.money,
-      stocks: user.stocks
+      stocks: user.stocks,
+      transactions: user.transactions,
     }
   end
 
@@ -26,7 +27,8 @@ class UsersController < ApiController
         email: user.email,
         name: user.name,
         money: user.money,
-        stocks: user.stocks
+        stocks: user.stocks,
+        transactions: user.transactions,
       }
     end
   end

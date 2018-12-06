@@ -33,6 +33,8 @@ class Portfolio extends Component {
       console.log(res)
       this.setState({
         money: res.money,
+        transactions: res.transactions,
+        stocks: res.stocks,
       })
     })
   }
@@ -92,7 +94,6 @@ class Portfolio extends Component {
     }).then(res => {
       return res.json();
     }).then(res => {
-      let money = res.money;
       console.log(res)
       this.setState({
         money: res.money,
@@ -100,16 +101,19 @@ class Portfolio extends Component {
         stocks: res.stocks,
         error: false,
       })
+      console.log(this.state.money)
+      console.log(this.state.transactions)
+      console.log(this.state.stocks)
     });
 
   }
 
   stockShower() {
     if (this.state.stocks) {
-      this.state.stocks.map(stock => {
+      return this.state.stocks.map(stock => {
         return (
-          <div>
-            {`You have ${stock.shares} shares of ${stock.ticker} stock.`}
+          <div key={stock.id}>
+            {stock.ticker.toUpperCase()} stock: {stock.shares} shares
           </div>
         )
       })
@@ -133,7 +137,7 @@ class Portfolio extends Component {
           <form onSubmit={this.buyStock} >
             <input type="ticker" name="ticker" placeholder="ticker symbol" value={this.state.ticker} onChange={this.handleChange} />
             <br />
-            <input type="shares" name="shares" placeholder="shares" value={this.state.shares} onChange={this.handleChange} />
+            <input type="number" min="1" name="shares" placeholder="shares" value={this.state.shares} onChange={this.handleChange} />
             <br />
             <input type="submit" value="Buy Stock" />
           </form>
