@@ -33,7 +33,13 @@ class UsersController < ApiController
 
   def transactionHistory
     user = User.find_by_auth_token!(request.headers[:token])
-    render json: { user.transactions }
+    render json: {
+      email: user.email,
+      name: user.name,
+      money: user.money,
+      stocks: user.stocks,
+      transactions: user.transactions,
+    }
   end
 
   private

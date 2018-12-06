@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :users
 
   post "/buyStock" => "users#buy"
-  get "/getTransactions" => "user#transactionHistory"
+  get "/getTransactions" => "users#transactionHistory"
 end

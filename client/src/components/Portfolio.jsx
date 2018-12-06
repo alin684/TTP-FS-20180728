@@ -66,11 +66,13 @@ class Portfolio extends Component {
             body: JSON.stringify({ ticker: ticker, price: price, shares:shares }),
             headers: {
               'Content-Type': 'application/json',
+              token: Auth.getToken(),
+              'Authorization': `Token ${Auth.getToken()}`,
             }
           })
           .then(res => res.json())
           .then(res => {
-            console.log(res)
+            this.getTransactions();
           })
         } else {
           this.setState({ error: true})
@@ -89,15 +91,8 @@ class Portfolio extends Component {
       return res.json();
     }).then(res => {
       let money = res.money;
-      let transactions = res.transactions.map(trans => {
-        return (
-          <p>
-            {`You have ${trans.shares} shares of ${trans.ticker} stock.`}
-          </p>
-        )
-      })
+      console.log(res)
       this.setState({
-        transactions: transactions,
         money: money,
         error: false,
       })
