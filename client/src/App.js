@@ -10,6 +10,7 @@ import Auth from './modules/Auth';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Portfolio from './components/Portfolio';
+import TransactionHistory from './components/TransactionHistory';
 
 class App extends Component {
   constructor() {
@@ -118,6 +119,11 @@ class App extends Component {
             exact path="/portfolio"
             render={() => (this.state.auth)
               ? <Portfolio />
+              : <Redirect to="/login" />} />
+          <Route
+            exact path="/transactionhistory"
+            render={() => (this.state.auth)
+              ? <TransactionHistory />
               : <Redirect to="/login" />} />
         </div>
       </Router>
