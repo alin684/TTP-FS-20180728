@@ -18,6 +18,30 @@ class TransactionHistory extends Component {
     });
   }
 
+  getTransactions() {
+    fetch('/getTransactions', {
+      method: "GET",
+      headers: {
+        token: Auth.getToken(),
+        'Authorization': `Token ${Auth.getToken()}`,
+      }
+    }).then(res => {
+      return res.json();
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        money: res.money,
+        transactions: res.transactions,
+        stocks: res.stocks,
+        error: false,
+      })
+      console.log(this.state.money)
+      console.log(this.state.transactions)
+      console.log(this.state.stocks)
+    });
+
+  }
+
   render() {
     return (
       <div>
