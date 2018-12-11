@@ -10,6 +10,14 @@ class TransactionHistory extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
     return (
       <div>

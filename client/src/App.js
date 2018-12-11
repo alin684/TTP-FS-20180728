@@ -101,6 +101,7 @@ class App extends Component {
             <Menu.Item name='login' as={Link} to='/login' />
             <Menu.Item name='register' as={Link} to='/register' />
             <Menu.Item name='portfolio' as={Link} to='/portfolio' />
+            <Menu.Item name='transactionHistory' as={Link} to='/transactionHistory' />
             <Menu.Item name='logout' onClick={this.handleLogout} />
             </Menu.Menu>
           </Menu>
@@ -121,7 +122,7 @@ class App extends Component {
               ? <Portfolio />
               : <Redirect to="/login" />} />
           <Route
-            exact path="/transactionhistory"
+            exact path="/transactionHistory"
             render={() => (this.state.auth)
               ? <TransactionHistory />
               : <Redirect to="/login" />} />
