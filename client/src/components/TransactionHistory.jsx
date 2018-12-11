@@ -11,6 +11,11 @@ class TransactionHistory extends Component {
   }
 
   render() {
+    return (
+      <div>
+        Hello
+      </div>
+    )
   }
 }
 
