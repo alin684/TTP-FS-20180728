@@ -6,8 +6,12 @@ class TransactionHistory extends Component {
   constructor() {
     super();
     this.state = {
+      money: '',
+      transactions: '',
+      stocks: '',
     }
     this.handleChange = this.handleChange.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
   }
 
   handleChange(e) {
@@ -16,6 +20,10 @@ class TransactionHistory extends Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  componentDidMount(){
+    this.getTransactions();
   }
 
   getTransactions() {
@@ -33,7 +41,6 @@ class TransactionHistory extends Component {
         money: res.money,
         transactions: res.transactions,
         stocks: res.stocks,
-        error: false,
       })
       console.log(this.state.money)
       console.log(this.state.transactions)
