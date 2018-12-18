@@ -36,7 +36,6 @@ class TransactionHistory extends Component {
     }).then(res => {
       return res.json();
     }).then(res => {
-      console.log(res)
       this.setState({
         money: res.money,
         transactions: res.transactions,
@@ -47,6 +46,18 @@ class TransactionHistory extends Component {
       console.log(this.state.stocks)
     });
 
+  }
+
+  stockShower() {
+    if (this.state.stocks) {
+      return this.state.stocks.map(stock => {
+        return (
+          <div key={stock.id}>
+            {stock.ticker.toUpperCase()} stock: {stock.shares} shares
+          </div>
+        )
+      })
+    }
   }
 
   render() {
