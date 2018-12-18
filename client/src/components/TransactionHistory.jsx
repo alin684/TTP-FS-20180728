@@ -50,11 +50,11 @@ class TransactionHistory extends Component {
   }
 
   showTransactions() {
-    if (this.state.stocks) {
-      return this.state.stocks.map(stock => {
+    if (this.state.transactions) {
+      return this.state.transactions.map(trans => {
         return (
-          <div key={stock.id}>
-            {stock.ticker.toUpperCase()} stock: {stock.shares} shares
+          <div key={trans.id}>
+            
           </div>
         )
       })
