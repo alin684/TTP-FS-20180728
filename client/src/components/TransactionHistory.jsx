@@ -12,6 +12,7 @@ class TransactionHistory extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
+    this.showTransactions = this.showTransactions.bind(this);
   }
 
   handleChange(e) {
@@ -48,7 +49,7 @@ class TransactionHistory extends Component {
 
   }
 
-  stockShower() {
+  showTransactions() {
     if (this.state.stocks) {
       return this.state.stocks.map(stock => {
         return (
@@ -63,7 +64,7 @@ class TransactionHistory extends Component {
   render() {
     return (
       <div>
-        Hello
+        {this.showTransactions()}
       </div>
     )
   }
