@@ -54,7 +54,7 @@ class TransactionHistory extends Component {
       return this.state.transactions.map(trans => {
         return (
           <div key={trans.id}>
-            
+            {trans.ticker.toUpperCase()} stock: {trans.shares} shares
           </div>
         )
       })
