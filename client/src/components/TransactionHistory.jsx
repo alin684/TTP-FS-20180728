@@ -62,8 +62,6 @@ class TransactionHistory extends Component {
     }
   }
 
-  checkTransactions() {
-
 
   render() {
     return (
