@@ -68,6 +68,7 @@ class TransactionHistory extends Component {
         return (
           <div key={trans.id}>
             Transactions
+            
             {trans.ticker.toUpperCase()} stock: {trans.shares} shares
           </div>
         )
