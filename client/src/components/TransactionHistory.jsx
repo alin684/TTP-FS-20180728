@@ -62,7 +62,6 @@ class TransactionHistory extends Component {
     }
   }
 
-
   render() {
     return (
       <div>
