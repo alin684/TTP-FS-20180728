@@ -9,3 +9,8 @@ class TransactionHistory extends Component {
       money: '',
       transactions: '',
       stocks: '',
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
+    this.showTransactions = this.showTransactions.bind(this);
+  }
