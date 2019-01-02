@@ -14,3 +14,11 @@ class TransactionHistory extends Component {
     this.getTransactions = this.getTransactions.bind(this);
     this.showTransactions = this.showTransactions.bind(this);
   }
+
+handleChange(e) {
+const name = e.target.name;
+const value = e.target.value;
+this.setState({
+  [name]: value,
+});
+}
