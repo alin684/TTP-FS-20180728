@@ -68,13 +68,6 @@ if (this.state.transactions) {
 }
 }
 
-render() {
-return (
-  <div>
-    {this.showTransactions()}
-  </div>
-)
-}
-}
+
 
 export default TransactionHistory;
