@@ -129,10 +129,9 @@ if (this.state.transactions) {
 })
 }
 {trans.ticker.toUpperCase()} stock: {trans.shares} shares
-</div>
-)
-})
-}
+return this.state.transactions.map(trans => {
+  return (
+    showTransactions() {
 
 
 export default TransactionHistory;
