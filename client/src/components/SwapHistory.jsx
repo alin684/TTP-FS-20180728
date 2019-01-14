@@ -132,6 +132,9 @@ if (this.state.transactions) {
 return this.state.transactions.map(trans => {
   return (
     showTransactions() {
+      return (
+        showTransactions() {
+          extends
 
 
 export default TransactionHistory;
