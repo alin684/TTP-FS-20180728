@@ -116,6 +116,23 @@ if (this.state.transactions) {
 )
 })
 }
+}
+</div>
+)
+})
+}
+{trans.ticker.toUpperCase()} stock: {trans.shares} shares
+</div>
+)
+})
+}
+})
+}
+{trans.ticker.toUpperCase()} stock: {trans.shares} shares
+</div>
+)
+})
+}
 
 
 export default TransactionHistory;
