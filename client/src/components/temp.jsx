@@ -8,8 +8,12 @@ let transactions = res.transactions.map(trans => {
   console.log(trans)
 })
 
-<Menu className="navBar" inverted fixed="bottom">
-  <Menu.Menu position='right'>
-  <Menu.Item name='login' as={Link} to='/login' />
-
-</Menu>
+if (this.state.transactions) {
+  return this.state.transactions.map(trans => {
+    return (
+      <div key={trans.id}>
+        Transactions
+        {trans.ticker.toUpperCase()} stock: {trans.shares} shares
+      </div>
+    )
+  })
