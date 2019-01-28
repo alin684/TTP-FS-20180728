@@ -12,3 +12,6 @@ let transactions = res.transactions.map(trans => {
   console.log(trans)
       )
     })
+    end
+    <p>
+    </p>
