@@ -15,3 +15,6 @@ let transactions = res.transactions.map(trans => {
     end
     <p>
     </p>
+    end
+
+end
