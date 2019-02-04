@@ -15,5 +15,8 @@ end
   <Menu.Item name='register' as={Link} to='/register' />
   <Menu.Item name='transactionHistory' as={Link} to='/transactionHistory' />
   <Menu.Item name='logout' onClick={this.handleLogout} />
+  <Menu.Item name='register' as={Link} to='/register' />
+  <Menu.Item name='transactionHistory' as={Link} to='/transactionHistory' />
+  
   </Menu.Menu>
 </Menu>
